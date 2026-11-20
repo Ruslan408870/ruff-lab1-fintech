@@ -1,4 +1,0 @@
-[
-  "test_fraud_filter.py::test_flags_high_amount_and_risk_country",
-  "test_fraud_filter.py::test_vip_bypass_and_zero_amount"
-]
