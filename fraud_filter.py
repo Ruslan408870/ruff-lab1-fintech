@@ -3,20 +3,18 @@ HIGH_RISK_COUNTRIES = ["XX", "YY", "ZZ"]
 
 
 def filter_suspicious_transfers(transfers, vip_bypass=False):
-    audit_session = "SESSION_991"
     suspicious = []
 
-    for i in range(len(transfers)):
-        tx = transfers[i]
-        if tx.get("is_verified") == True and vip_bypass == True:
+    for tx in transfers:
+        if tx.get("is_verified") and vip_bypass:
             continue
 
-        if tx.get("sender") == None or tx.get("amount") == None:
+        if tx.get("sender") is None or tx.get("amount") is None:
             continue
 
         try:
             fee_ratio = tx["fee"] / tx["amount"]
-        except:
+        except ZeroDivisionError:
             fee_ratio = 0.0
 
         if (
